@@ -13,7 +13,9 @@ const Navbar = () => {
       ? '/admin'
       : user?.role === 'exhibitor'
       ? '/exhibitor'
-      : '/expos';
+      : user?.role === 'attendee'
+      ? '/attendee'
+      : '/';
 
   const handleLogout = () => {
     logout();

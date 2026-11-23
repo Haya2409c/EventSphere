@@ -54,7 +54,8 @@ const Login = () => {
       // Role ke hisaab se redirect
       if (loggedInUser.role === 'admin') navigate('/admin');
       else if (loggedInUser.role === 'exhibitor') navigate('/exhibitor');
-      else navigate('/expos');
+      else if (loggedInUser.role === 'attendee') navigate('/attendee');
+      else navigate('/');
     } catch (err) {
       setApiError(err.response?.data?.message || err.message || 'Unable to sign in. Please try again.');
     } finally {

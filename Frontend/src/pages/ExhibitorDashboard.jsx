@@ -21,6 +21,8 @@ const ExhibitorDashboard = () => {
   const [leads, setLeads] = useState(initialLeads);
   const [actionToast, setActionToast] = useState('');
 
+  const pendingMeetings = leads.filter((lead) => lead.status === 'Pending').length;
+
   const triggerQuickAction = (message) => {
     setActionToast(message);
     setTimeout(() => setActionToast(''), 2800);
@@ -32,73 +34,80 @@ const ExhibitorDashboard = () => {
     );
   };
 
+  const stats = [
+    { label: 'Booth Visits', value: '342', tag: '+18% today', accent: 'text-[#5145CD]' },
+    { label: 'Saved Bookmarks', value: '89', tag: 'High interest', accent: 'text-[#80643a]' },
+    { label: 'Brochure Downloads', value: '124', tag: 'PDF active', accent: 'text-[#42664d]' },
+    {
+      label: 'Pending Meetings',
+      value: String(pendingMeetings).padStart(2, '0'),
+      tag: pendingMeetings > 0 ? 'Action needed' : 'All caught up',
+      accent: 'text-[#192334]',
+    },
+  ];
+
   return (
     <div className="space-y-8 pb-12">
-      
       {/* Quick Feedback Toast */}
       {actionToast && (
         <div
           role="status"
-          className="fixed bottom-6 right-6 z-50 rounded-xl bg-[#192334] px-5 py-3 text-xs font-semibold text-[#e2bd82] shadow-xl border border-white/10"
+          className="fixed bottom-6 right-6 z-50 rounded-xl border border-white/10 bg-[#192334] px-5 py-3 text-xs font-semibold text-[#e2bd82] shadow-xl"
         >
           ✓ {actionToast}
         </div>
       )}
 
       {/* 1. Editorial Hero Banner */}
-      <section className="relative overflow-hidden rounded-[2rem] bg-[#192334] p-6 sm:p-10 text-white">
-          <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full border border-white/10" />
-          <div className="pointer-events-none absolute right-12 top-12 h-48 w-48 rounded-full bg-[#d5a35b]/20 blur-3xl" />
+      <section className="relative overflow-hidden rounded-[2rem] bg-[#192334] p-6 text-white sm:p-10">
+        <div className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full border border-white/10" />
+        <div className="pointer-events-none absolute right-12 top-12 h-48 w-48 rounded-full bg-[#d5a35b]/20 blur-3xl" />
 
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-xl">
-              <div className="flex flex-wrap items-center gap-2.5 mb-4">
-                <span className="rounded-full bg-[#e2bd82]/15 border border-[#e2bd82]/40 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#e2bd82]">
-                  Booth A12 • Featured
-                </span>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-slate-200">
-                  Global Tech Summit 2026
-                </span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-semibold leading-tight tracking-tight">
-                Your show floor is <span className="font-serif font-normal italic text-[#e2bd82]">ready for visitors.</span>
-              </h2>
-              <p className="mt-3 text-sm text-slate-300 leading-6">
-                Track real-time booth traffic, manage meeting requests, and keep your digital brochure one tap away.
-              </p>
+        <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-xl">
+            <div className="mb-4 flex flex-wrap items-center gap-2.5">
+              <span className="rounded-full border border-[#e2bd82]/40 bg-[#e2bd82]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#e2bd82]">
+                Booth A12 • Featured
+              </span>
+              <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-slate-200">
+                Global Tech Summit 2026
+              </span>
             </div>
-
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => triggerQuickAction('Exhibitor Badge QR ready to scan')}
-                className="rounded-xl bg-[#e2bd82] px-5 py-3 text-xs font-semibold text-[#192334] transition hover:bg-[#ebd09f]"
-              >
-                Scan Visitor Badge
-              </button>
-              <Link
-                to="/exhibitors"
-                className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-xs font-semibold text-white transition hover:bg-white/10"
-              >
-                Preview Public Card →
-              </Link>
-            </div>
+            <h2 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              Your show floor is{' '}
+              <span className="font-serif font-normal italic text-[#e2bd82]">ready for visitors.</span>
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-slate-300">
+              Track real-time booth traffic, manage meeting requests, and keep your digital brochure one tap away.
+            </p>
           </div>
+
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => triggerQuickAction('Exhibitor Badge QR ready to scan')}
+              className="rounded-xl bg-[#e2bd82] px-5 py-3 text-xs font-semibold text-[#192334] transition hover:bg-[#ebd09f] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#e2bd82]/40"
+            >
+              Scan Visitor Badge
+            </button>
+            <Link
+              to="/exhibitors"
+              className="rounded-xl border border-white/20 bg-white/5 px-5 py-3 text-xs font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-[3px] focus-visible:ring-white/30"
+            >
+              Preview Public Card →
+            </Link>
+          </div>
+        </div>
       </section>
 
-      {/* 2. Bento KPI Row (8-point spacing) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {[
-          { label: 'Booth Visits', value: '342', tag: '+18% today', accent: 'text-[#5145CD]' },
-          { label: 'Saved Bookmarks', value: '89', tag: 'High interest', accent: 'text-[#80643a]' },
-          { label: 'Brochure Downloads', value: '124', tag: 'PDF active', accent: 'text-[#42664d]' },
-          { label: 'Pending Meetings', value: '02', tag: 'Action needed', accent: 'text-[#192334]' },
-        ].map((stat) => (
+      {/* 2. Bento KPI Row */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => (
           <div
             key={stat.label}
             className="rounded-2xl border border-[#e6e5e0] bg-white p-6 transition hover:-translate-y-0.5 hover:border-[#d2c8b7] hover:shadow-[0_12px_28px_rgba(25,35,52,0.06)]"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#737980]">{stat.label}</p>
               <span className="rounded-full bg-[#f3f0e9] px-2.5 py-0.5 text-[10px] font-semibold text-[#80643a]">
                 {stat.tag}
@@ -235,13 +244,15 @@ const ExhibitorDashboard = () => {
                     key={item.title}
                     type="button"
                     onClick={() => triggerQuickAction(item.msg)}
-                    className="w-full text-left rounded-xl border border-[#e6e5e0] bg-[#fafaf8] p-4 transition hover:border-[#5145CD]/40 hover:bg-white hover:shadow-xs group"
+                    className="group w-full rounded-xl border border-[#e6e5e0] bg-[#fafaf8] p-4 text-left transition hover:border-[#5145CD]/40 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5145CD]/20"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-[#192334] group-hover:text-[#5145CD] transition">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-sm font-semibold text-[#192334] transition group-hover:text-[#5145CD]">
                         {item.title}
                       </span>
-                      <span className="text-xs text-[#9a8058] transition-transform group-hover:translate-x-1">→</span>
+                      <span className="text-xs text-[#9a8058] transition-transform group-hover:translate-x-1" aria-hidden="true">
+                        →
+                      </span>
                     </div>
                     <p className="mt-1 text-xs text-[#737980]">{item.desc}</p>
                   </button>
@@ -254,12 +265,14 @@ const ExhibitorDashboard = () => {
 
       {/* 4. Visitor Leads & Meeting Requests */}
       <section className="rounded-2xl border border-[#e6e5e0] bg-white p-6 shadow-[0_8px_28px_rgba(25,35,52,0.04)]">
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#9a8058]">Attendee Pipeline</p>
               <h3 className="text-xl font-semibold text-[#192334]">Upcoming Booth Meetings</h3>
             </div>
-            <span className="text-xs font-medium text-[#737980]">{leads.length} active requests</span>
+            <span className="text-xs font-medium text-[#737980]">
+              {pendingMeetings} pending • {leads.length} total
+            </span>
           </div>
 
           <div className="overflow-x-auto">
@@ -298,7 +311,7 @@ const ExhibitorDashboard = () => {
                         <button
                           type="button"
                           onClick={() => confirmLead(lead.id)}
-                          className="rounded-lg bg-[#192334] px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-[#5145CD]"
+                          className="rounded-lg bg-[#192334] px-3.5 py-1.5 text-xs font-semibold text-white transition hover:bg-[#5145CD] focus:outline-none focus-visible:ring-[3px] focus-visible:ring-[#5145CD]/30"
                         >
                           Accept
                         </button>

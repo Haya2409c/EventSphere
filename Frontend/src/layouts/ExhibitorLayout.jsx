@@ -145,31 +145,59 @@ const ExhibitorLayout = () => {
 
       {/* Main Content */}
       <div ref={contentRef} className="flex min-w-0 flex-1 flex-col lg:h-screen lg:overflow-y-auto">
-        <header className="sticky top-0 z-20 h-20 bg-[#f7f7f5]/90 backdrop-blur-md border-b border-[#e6e5e0] px-4 sm:px-8 flex items-center justify-between">
-          <div className="flex min-w-0 items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setSidebarOpen(true)}
-              aria-label="Open menu"
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#e6e5e0] bg-white text-[#192334] lg:hidden"
-            >
-              ☰
-            </button>
-            <div className="min-w-0">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a8058]">Exhibitor Portal</p>
-              <h1 className="truncate text-base font-semibold text-[#192334] sm:text-lg">
-                Welcome back, {user?.name || 'TechNova Solutions'}
-              </h1>
-            </div>
-          </div>
+        <header className="sticky top-0 z-20 border-b border-[#e6e5e0]/80 bg-[#f7f7f5]/85 px-4 py-3 backdrop-blur-md sm:px-8">
+          <div className="flex min-h-[3.5rem] items-center justify-between gap-3 sm:gap-4">
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open menu"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#e6e5e0] bg-white text-[#192334] shadow-sm transition hover:border-[#d8d4cc] hover:bg-[#fafaf8] lg:hidden"
+              >
+                ☰
+              </button>
 
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[#e6e5e0] bg-white px-3.5 py-1.5 text-xs font-semibold text-[#42664d]">
-              <span className="h-2 w-2 rounded-full bg-[#42664d]" />
-              Live on Floor Plan
-            </span>
-            <div className="h-10 w-10 rounded-full bg-[#192334] text-[#e2bd82] font-bold text-sm flex items-center justify-center">
-              {(user?.name || 'T').charAt(0).toUpperCase()}
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                  <span className="inline-flex items-center rounded-full border border-[#e2bd82]/35 bg-[#f3f0e9] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#7a5f35]">
+                    Exhibitor Portal
+                  </span>
+                  <span className="hidden items-center gap-1.5 text-[11px] font-medium text-[#687078] sm:inline-flex">
+                    <span className="h-1 w-1 rounded-full bg-[#c9bea9]" aria-hidden="true" />
+                    Booth workspace
+                  </span>
+                </div>
+                <div className="mt-1 flex min-w-0 items-baseline gap-2">
+                  <h1 className="truncate text-lg font-semibold tracking-tight text-[#192334] sm:text-xl">
+                    <span className="mr-1.5 text-sm font-medium text-[#687078] sm:text-base">Welcome back,</span>
+                    {user?.name || 'TechNova Solutions'}
+                  </h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+              <span className="hidden items-center gap-2 rounded-full border border-[#dfe9e2] bg-white px-3 py-1.5 text-xs font-semibold text-[#42664d] shadow-sm md:inline-flex">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#42664d]/40" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#42664d]" />
+                </span>
+                Live on Floor Plan
+              </span>
+
+              <div className="hidden h-8 w-px bg-[#e6e5e0] sm:block" aria-hidden="true" />
+
+              <div className="flex items-center gap-2 rounded-2xl border border-[#e6e5e0] bg-white/90 py-1 pl-1 pr-2.5 shadow-sm sm:pr-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#192334] text-sm font-bold text-[#e2bd82] ring-1 ring-[#e2bd82]/20">
+                  {(user?.name || 'T').charAt(0).toUpperCase()}
+                </div>
+                <div className="hidden min-w-0 sm:block">
+                  <p className="max-w-[10rem] truncate text-xs font-semibold text-[#192334]">
+                    {user?.name || 'TechNova Solutions'}
+                  </p>
+                  <p className="text-[11px] font-medium text-[#687078]">Exhibitor account</p>
+                </div>
+              </div>
             </div>
           </div>
         </header>

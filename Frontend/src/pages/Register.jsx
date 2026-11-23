@@ -67,7 +67,7 @@ const Register = () => {
     try {
       setLoading(true);
       await register({ name: fullName, email, password, role });
-      navigate(role === 'exhibitor' ? '/exhibitor' : '/expos');
+      navigate(role === 'exhibitor' ? '/exhibitor' : role === 'attendee' ? '/attendee' : '/');
     } catch (err) {
       setApiError(err.response?.data?.message || err.message || 'Unable to create account. Please try again.');
     } finally {
