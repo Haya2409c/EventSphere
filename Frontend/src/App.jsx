@@ -4,6 +4,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminLayout from './layouts/AdminLayout';
 import AdminDashboard from './pages/AdminDashboard';
+import ManageExpos from './pages/ManageExpos';
+import ExhibitorApprovals from './pages/ExhibitorApprovals';
+import ScheduleManagement from './pages/ScheduleManagement';
 import Home from './pages/Home';
 import Expos from './pages/Expos';
 import ExpoDetails from './pages/ExpoDetails';
@@ -12,6 +15,12 @@ import ForgotPassword from './pages/ForgotPassword';
 import ProtectedRoute from './components/ProtectedRoute';
 import ExhibitorLayout from './layouts/ExhibitorLayout';
 import ExhibitorDashboard from './pages/ExhibitorDashboard';
+import CompanyProfile from './pages/CompanyProfile';
+import BoothManagement from './pages/BoothManagement';
+import OrganizerMessages from './pages/OrganizerMessages';
+import AttendeeLayout from './layouts/AttendeeLayout';
+import AttendeePasses from './pages/AttendeePasses';
+import AttendeeSchedule from './pages/AttendeeSchedule';
 
 
 // Public Layout component jo sirf un pages par Navbar dikhayega
@@ -49,10 +58,23 @@ function App() {
   }
 >
   <Route index element={<ExhibitorDashboard />} />
-  <Route path="profile" element={<div className="p-6 bg-white rounded-2xl border border-[#e6e5e0]">Company Profile & Products — Next Step</div>} />
-  <Route path="booths" element={<div className="p-6 bg-white rounded-2xl border border-[#e6e5e0]">Booth Selection & Management — Next Step</div>} />
-  <Route path="messages" element={<div className="p-6 bg-white rounded-2xl border border-[#e6e5e0]">Organizer Messages — Next Step</div>} />
-</Route>
+  <Route path="profile" element={<CompanyProfile />} />
+  <Route path="booths" element={<BoothManagement />} />
+  <Route path="messages" element={<OrganizerMessages />} />
+  </Route>
+
+        {/* Attendee Routes (protected, attendee role) */}
+        <Route
+          path="/attendee"
+          element={
+            <ProtectedRoute allowedRoles={['attendee']}>
+              <AttendeeLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<AttendeePasses />} />
+          <Route path="schedule" element={<AttendeeSchedule />} />
+        </Route>
 
 
         {/* Admin Routes WITHOUT Navbar */}
@@ -63,9 +85,9 @@ function App() {
   }
 >
           <Route index element={<AdminDashboard />} />
-          <Route path="expos" element={<div>Manage Expos Module</div>} />
-          <Route path="exhibitors" element={<div>Exhibitor Approvals Module</div>} />
-          <Route path="schedule" element={<div>Event Schedule Module</div>} />
+          <Route path="expos" element={<ManageExpos />} />
+          <Route path="exhibitors" element={<ExhibitorApprovals />} />
+          <Route path="schedule" element={<ScheduleManagement />} />
         </Route>
         
 
