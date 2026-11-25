@@ -17,6 +17,11 @@ const navSections = [
         label: 'Attendee Schedule',
         icon: 'M8 2v4 M16 2v4 M3 10h18 M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z',
       },
+      {
+        to: '/attendee/floor-map',
+        label: '3D Floor Map',
+        icon: 'M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z M8.5 12.5l3.5-3.5l3.5 3.5 M12 9v6',
+      },
     ],
   },
 ];

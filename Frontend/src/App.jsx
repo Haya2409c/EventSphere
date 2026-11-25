@@ -21,6 +21,8 @@ import OrganizerMessages from './pages/OrganizerMessages';
 import AttendeeLayout from './layouts/AttendeeLayout';
 import AttendeePasses from './pages/AttendeePasses';
 import AttendeeSchedule from './pages/AttendeeSchedule';
+import AttendeeFloorMap from './pages/AttendeeFloorMap';
+
 
 
 // Public Layout component jo sirf un pages par Navbar dikhayega
@@ -74,6 +76,7 @@ function App() {
         >
           <Route index element={<AttendeePasses />} />
           <Route path="schedule" element={<AttendeeSchedule />} />
+          <Route path="floor-map" element={<AttendeeFloorMap />} />
         </Route>
 
 
