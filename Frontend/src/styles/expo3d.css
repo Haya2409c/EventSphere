@@ -1,0 +1,34 @@
+:root {
+  --es-navy: #192334;
+  --es-navy-deep: #0f1624;
+  --es-gold: #e2bd82;
+  --es-ivory: #f7f7f5;
+  --es-surface: #ffffff;
+  --es-border: #e6e5e0;
+
+  --stall-taken: #64748b;
+  --stall-free: #dc2626;
+  --stall-selected: #2563eb;
+}
+
+.pass-perspective {
+  perspective: 1200px;
+}
+
+.pass-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pass-card-3d.is-vip {
+  transform: rotateY(180deg);
+}
+
+.pass-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.pass-face-back {
+  transform: rotateY(180deg);
+}
